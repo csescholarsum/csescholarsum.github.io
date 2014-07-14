@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Page</title>
+    </head>
+    <body>
+        <!-- Form for creating event -->
+       <form name="input" action="{{ROOTPATH}}/views/create_event.php" method="post">
+        Event Name: <input type="text" name="name">
+        Event Type: <input type="text" name="type">
+        Event Value: <input type="text" name="value">
+        Event Date: <input type="date" name="date">
+        <input type="submit" value="Submit">
+       </form>
+
+       <!-- Form for batch update hours -->
+       <form name="input" action="{{ROOTPATH}}/views/batch_event.php" method="post">
+       <select name="event">
+        {% for event in events %}
+        <option value="{{event.objectId}}">{{event.name}}</option>
+        {% endfor %}
+       </select>
+       <textarea name="names" rows="15" cols="15"></textarea>
+       <input type="submit" value="Submit">
+       </form>
+
+
+    </body>
+</html>

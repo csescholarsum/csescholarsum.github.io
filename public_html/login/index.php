@@ -7,36 +7,31 @@
 
 include('../includes/config.php');
 include('../tools/functions.php');
+include('../parse/parseQuery.php')
 //include( $_SESSION['path'] . 'tools/functions.php');
 
 //$_SERVER['REMOTE_USER'] is the users uniqname returned from cosign with .htaccess
 
-$user = $_SERVER['REMOTE_USER'];
-$_SESSION['USER_UNIQ'] = $user;
-
-//MYSQLI database call
-$connection = connect_to_db_with_sqli();
-
+$uniqname = $_SERVER['REMOTE_USER'];
+$_SESSION['USER_UNIQ'] = $uniqname;
 
 //_______________CHECK IF ADMIN________________________
 
-$query = "SELECT type FROM members WHERE uniqname = '$user' AND deleted=0";
+// Query Parse for user
+$parse = new parseQuery('People')
+$parse->whereEqualTo('uniqname', $uniqname)
+$member = $parse->find()
 
-$statement = $connection->prepare($query) or die("<p> Database login validation failed. </p>");
-
-$statement->execute();
-$statement->bind_result($type);
-
-if ($statement->fetch()) {
-
-	$_SESSION['type'] = $type;
-}
-else {
-
-	$_SESSION['type'] = "Other";
+//Check if works
+if (is_null($member)){
+    $_SESSION['type'] = "NotLoggedIn"
 }
 
-$statement->close();
+else if ($member->Type) {
+
+	$_SESSION['type'] = $member->Type;
+}
+
 
 //user is not authorized; redirect to main page
 header("Location: https://web.eecs.umich.edu/~cseschol/index.php");

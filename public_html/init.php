@@ -9,6 +9,7 @@ PURPOSE: This file has all the include statements needed
 include("includes/config.php");
 require_once("tools/functions.php");
 
+
 ?>
 
 <!DOCTYPE html>

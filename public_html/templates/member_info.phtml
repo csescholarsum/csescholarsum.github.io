@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Member Info</title>
+    </head>
+    <body>
+        <!-- Display member info -->
+        <h2>Corporate Events: {{ member.corporate }}</h2>
+        <h2> Social Events: {{ member.social }}</h2>
+        <h2>Service Hours: {{ member.service }}</h2>
+
+        <!-- Form for changing information -->
+       <form name="input" action="{{ROOTPATH}}/views/update_user.php" method="post">
+        Name: <input type="text" name="name" value="{{ member.name }}">
+        Major: <input type="text" name="major" value="{{ member.major }}">
+        Grad Month: <input type="text" name="gradMonth" value="{{ member.gradMonth }}">
+        Grad Year: <input type="text" name="gradYear" value="{{ member.gradYear }}">
+        <input type="submit" value="Submit">
+       </form>
+
+       <!-- Form for uploading resume -->
+       {% if member.type == 'Member' %}
+       <form action="{{ROOTPATH}}/views/upload_resume.php" method="post"
+       enctype="multipart/form-data">
+        <label for="file">Filename:</label>
+        <input type="file" name="file" id="file"><br>
+        <input type="submit" name="submit" value="Submit">
+       </form>
+       {% endif %}
+
+
+    </body>
+</html>

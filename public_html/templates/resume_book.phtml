@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Resume Book</title>
+    </head>
+    <body>
+        <h3>CSE Scholars Fall 2011</h3>
+
+        <table cellspacing="4">
+                <th>Name</th>
+                <th>Email</th>
+                <th>Major</th>
+                <th>Graduation</th>
+                <th>Resume</th>
+                <th>Events Attended</th>
+                <th>Service Hours</th>
+
+        {% for userData in members %}
+        <tr>
+            <td>{{userData.name}}</td>
+            <td>{{userData.uniqname}}@umich.edu</td>
+            <td>{{userData.major}}</td>
+            <td>{{userData.gradMonth}}/{{userData.gradYear}}</td>
+            <td><a href="{{userData.resume.url}}">Resume</a></td>
+            <td style=\"text-align:center;\">{{userData.events}}</td>
+            <td style=\"text-align:center;\">{{userData.serviceHours}}</td>
+        </tr>
+        {% endfor %}
+    </body>
+</html>
