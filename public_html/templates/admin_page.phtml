@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Admin Page</title>
-    </head>
-    <body>
+{% extends "layout.phtml" %}
+
+{% block title %}
+Admin Page
+{% endblock %}
+
+{% block content %}
         <!-- Form for creating event -->
        <form name="input" action="{{ROOTPATH}}/views/create_event.php" method="post">
         Event Name: <input type="text" name="name">
@@ -23,7 +24,5 @@
        <textarea name="names" rows="15" cols="15"></textarea>
        <input type="submit" value="Submit">
        </form>
+{% endblock %}
 
-
-    </body>
-</html>

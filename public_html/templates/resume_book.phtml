@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Resume Book</title>
-    </head>
-    <body>
+{% extends "layout.phtml" %}
+
+{% block title %}
+Resume Book
+{% endblock %}
+
+{% block content %}
         <h3>CSE Scholars Fall 2011</h3>
 
         <table cellspacing="4">
@@ -26,5 +27,4 @@
             <td style=\"text-align:center;\">{{userData.serviceHours}}</td>
         </tr>
         {% endfor %}
-    </body>
-</html>
+{% endblock %}

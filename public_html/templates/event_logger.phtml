@@ -1,0 +1,14 @@
+{% extends "layout.phtml" %}
+
+{% block title %}
+{{event.name}} - Event Logger
+{% endblock %}
+
+{% block content %}
+        <!-- Form for  registering for event-->
+       <form name="input" action="{{ROOTPATH}}/views/event_logger_post.php" method="post">
+        <input type="hidden" name="event" value="{{event.objectId}}">
+        Uniqname: <input type="text" name="uniqname">
+        <input type="submit" value="Submit">
+       </form>
+{% endblock %}

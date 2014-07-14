@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Member Info</title>
-    </head>
-    <body>
+{% extends "layout.phtml" %}
+
+{% block title %}
+Member Info - {{member.name}}
+{% endblock %}
+
+{% block content %}
         <!-- Display member info -->
         <h2>Corporate Events: {{ member.corporate }}</h2>
         <h2> Social Events: {{ member.social }}</h2>
@@ -28,6 +29,4 @@
        </form>
        {% endif %}
 
-
-    </body>
-</html>
+{% endblock %}
