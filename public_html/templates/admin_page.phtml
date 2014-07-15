@@ -24,5 +24,10 @@ Admin Page
        <textarea name="names" rows="15" cols="15"></textarea>
        <input type="submit" value="Submit">
        </form>
+
+       <!-- Go to event logger for events -->
+      {% for event in events %}
+      <a href="/views/event_logger.php?event={{event.objectId}}">{{event.name}}</a>
+      {% endfor %}
 {% endblock %}
 

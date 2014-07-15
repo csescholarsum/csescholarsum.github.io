@@ -11,21 +11,7 @@ PURPOSE: website main page
 //$_SESSION['type'] = "Admin";
 
 
-	include('init.php');
-
 ?>
-<head>
-
-
-    <title>
-    	CSE Scholars
-    </title>
-</head>
-<body>
-
-<h1> CSE Scholars </h1>
-
-</body>
 
 
 <!-- 

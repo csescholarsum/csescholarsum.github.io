@@ -7,7 +7,7 @@ include('../parse/parse.php');
 include('../twig.php');
 
 # Uncomment these for testing purposes
-$_SESSION['type'] = 'Member';
+$_SESSION['type'] = 'Admin';
 $_SESSION['USER_UNIQ'] = 'stepa';
 
 # Check if logged in
@@ -35,8 +35,10 @@ else if ($_SESSION['type'] == "Admin")
     $people = $parse->find();
     $person = $people->results;
 
-    if(!empty($person)){
+
+    if(empty($person)){
         # Create new member
+        echo print_r($person);
         $parse = new ParseObject('People');
         $parse->uniqname = $_POST['uniqname'];
         $objectId = $parse->save();
@@ -50,21 +52,39 @@ else if ($_SESSION['type'] == "Admin")
 
     $member = $person[0];
 
-    # Update hours
-    $object = new ParseObject('People');
-    if($event->type == 'corporate' or $event->type == 'Corporate'){
+    # Check if already signed in
+    $parse = new ParseQuery('EventAttendance');
+    $parse->whereEqualTo('event', $event->objectId);
+    $parse->whereEqualTo('person', $member->objectId);
+    $attendance = $parse->find()
+
+    if(empty($attendance->results)){
+
+        # Update hours
+        $object = new ParseObject('People');
+        if($event->type == 'corporate' or $event->type == 'Corporate'){
     
-        $object->corporate = $member->corporate + $event->value;             
+            $object->corporate = $member->corporate + $event->value;             
+        }
+        if($event->type == 'social' or $event->type == 'Social'){
+    
+            $object->social = $member->social + $event->value;             
+        }       
+        if($event->type == 'service' or $event->type == 'Service'){
+    
+            $object->service = $member->service + $event->value;             
+        }
+        $object->update($member->objectId);
+
+        # Build EventAttendance
+        $object = new ParseObject('EventAttendance');
+        $object->person = $member->objectId;
+        $object->event = $event->objectId;
+        $object->save();  
+
     }
-    if($event->type == 'social' or $event->type == 'Social'){
-    
-        $object->social = $member->social + $event->value;             
-    }       
-    if($event->type == 'service' or $event->type == 'Service'){
-    
-        $object->service = $member->service + $event->value;             
-    }
-    $object->update($member->objectId);
+
+    echo $twig->render('event_logger.phtml', array('event' => $event));
 
 
 }

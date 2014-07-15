@@ -7,7 +7,7 @@ include('../parse/parse.php');
 include('../twig.php');
 
 # Uncomment these for testing purposes
-$_SESSION['type'] = 'Member';
+$_SESSION['type'] = 'Admin';
 $_SESSION['USER_UNIQ'] = 'stepa';
 
 # Check if logged in
@@ -20,7 +20,7 @@ if (!isset($_SESSION['type']))
 # Is admin
 else if ($_SESSION['type'] == "Admin")
 {
-    $eventId = $_POST['event'];
+    $eventId = $_GET['event'];
 
     $parse = new ParseQuery('Event');
     $parse->whereEqualTo('objectId', $eventId);
