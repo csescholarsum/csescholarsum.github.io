@@ -5,6 +5,7 @@
 
 include('../parse/parse.php');
 include('../twig.php');
+include('../config.php');
 
 # Uncomment these for testing purposes
 $_SESSION['type'] = 'Admin';
@@ -14,14 +15,14 @@ $_SESSION['USER_UNIQ'] = 'stepa';
 if (!isset($_SESSION['type']))
 { 
     # Redirect home
-    header("Location: https://web.eecs.umich.edu/~cseschol/index.php");
+    header("Location: {$siteurl}");
 }
 
 # Is logged in 
 else if ($_SESSION['type'] == "NotLoggedIn")
 {
     # Redirect home
-    header("Location: https://web.eecs.umich.edu/~cseschol/index.php");
+    header("Location: {$siteurl}");
 }
 
 else{
@@ -35,7 +36,7 @@ else{
     $member = $member->results[0];
 
     // Make person member if they should be
-    if($member->corporate >= 5 and $member->social >= 5 and $member->service >= 5 and $member->type == 'Prospective'){
+    if($member->corporate >= $corporateevents and $member->social >= $socialevents and $member->service >= $serviceevents and $member->type == 'Prospective'){
         $object = new ParseObject('People');
         $object->type = 'Member';
         $object->update($member->objectId);
@@ -50,6 +51,6 @@ else{
     }
 
 
-    echo $twig->render('member_info.phtml', array('member' => $member, 'login' => $_SESSION['type']));
+    echo $twig->render('member_info.phtml', array('member' => $member, 'login' => $_SESSION['type'], 'serviceevents' => $serviceevents, 'socialevents' => $socialevents, 'corporateevents' => $corporateevents));
 }
 ?>

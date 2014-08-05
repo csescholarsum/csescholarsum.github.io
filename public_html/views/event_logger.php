@@ -5,6 +5,7 @@
 
 include('../parse/parse.php');
 include('../twig.php');
+include('../config.php');
 
 # Uncomment these for testing purposes
 $_SESSION['type'] = 'Admin';
@@ -14,7 +15,7 @@ $_SESSION['USER_UNIQ'] = 'stepa';
 if (!isset($_SESSION['type']))
 { 
     # Redirect home
-    header("Location: https://web.eecs.umich.edu/~cseschol/index.php");
+    header("Location: {$siteurl}");
 }
 
 # Is admin
@@ -32,6 +33,6 @@ else if ($_SESSION['type'] == "Admin")
 
 else{
     # Redirect home
-    header("Location: https://web.eecs.umich.edu/~cseschol/index.php");
+    header("Location: {$siteurl}");
 }
 ?>

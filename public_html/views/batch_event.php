@@ -5,6 +5,7 @@
 
     include('../parse/parse.php');
     include('../twig.php');
+    include('../config.php');
 
     # Comment out for testing
     $_SESSION['type'] = 'Member';
@@ -15,14 +16,14 @@
     if (!isset($_SESSION['type']))
     { 
         # Redirect home
-        header("Location: https://web.eecs.umich.edu/~cseschol/index.php");
+        header("Location: {$siteurl}");
     }
 
     # Is logged in 
     else if ($_SESSION['type'] == "NotLoggedIn")
     {
         # Redirect home
-        header("Location: https://web.eecs.umich.edu/~cseschol/index.php");
+        header("Location: {$siteurl}");
     }
 
     else{
