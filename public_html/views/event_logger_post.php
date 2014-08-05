@@ -41,6 +41,7 @@ else if ($_SESSION['type'] == "Admin")
         echo print_r($person);
         $parse = new ParseObject('People');
         $parse->uniqname = $_POST['uniqname'];
+        $parse->type = "Prospective";
         $objectId = $parse->save();
 
         # Requery

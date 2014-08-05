@@ -28,7 +28,7 @@
     else{
         $parse = new ParseQuery('Event');
         $events = $parse->find();
-        echo $twig->render('admin_page.phtml', array('events' => $events->results));
+        echo $twig->render('admin_page.phtml', array('events' => $events->results, 'login' => $_SESSION['type']));
 
     }
 ?>

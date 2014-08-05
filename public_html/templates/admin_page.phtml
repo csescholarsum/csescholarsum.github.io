@@ -6,25 +6,52 @@ Admin Page
 
 {% block content %}
         <!-- Form for creating event -->
-       <form name="input" action="{{ROOTPATH}}/views/create_event.php" method="post">
-        Event Name: <input type="text" name="name">
-        Event Type: <input type="text" name="type">
-        Event Value: <input type="text" name="value">
-        Event Date: <input type="date" name="date">
-        <input type="submit" value="Submit">
+        <h1> Create an event!</h1>
+       <form role="form" name="input" action="{{ROOTPATH}}/views/create_event.php" method="post">
+        <div class="form-group">
+          <label for="namebox">Event Name:</label>
+          <input type="text" class="form-control" name="name" id="namebox">
+        </div>
+        <div class="form-group">
+          <label for="typebox">Event Type:</label>
+          <input type="text" class="form-control" name="type" id="typebox">
+        </div>
+        <div class="form-group">
+          <label for="valuebox"># of Hours:</label>
+          <input type="text" class="form-control" name="value" id="valuebox">
+        </div>
+        <div class="form-group">
+          <label for="namebox">Event Name:</label>
+          <input type="text" class="form-control" name="name" id="namebox">
+        </div>
+        <div class="form-group">
+          <label for="datebox">Event Date:</label>
+          <input type="date" class="form-control" name="date" id="datebox">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
        </form>
 
        <!-- Form for batch update hours -->
-       <form name="input" action="{{ROOTPATH}}/views/batch_event.php" method="post">
-       <select name="event">
+       <h1>Batch give hours for event</h1>
+       <p>Instructions: Choose the event on the dropdown and then enter all uniqnames in a list (newline after each one, including the last)</p>
+       <form role="form" name="input" action="{{ROOTPATH}}/views/batch_event.php" method="post">
+        <div class="form-group">
+          <label for="eventbox">Event:</label>
+       <select name="event" id="eventbox">
         {% for event in events %}
         <option value="{{event.objectId}}">{{event.name}}</option>
         {% endfor %}
        </select>
-       <textarea name="names" rows="15" cols="15"></textarea>
-       <input type="submit" value="Submit">
+      </div>
+      <div class="form-group">
+        <label for="namesbatch">Members:</label>
+       <textarea id="namesbatch" name="names" rows="15" cols="15"></textarea>
+     </div>
+     <button class="btn btn-default" type="submit">Submit</button>
        </form>
 
+       <h1> Event Logger!</h1>
+       <p> Time for an event? Go here for the signup page for getting hours </p>
        <!-- Go to event logger for events -->
       {% for event in events %}
       <a href="/views/event_logger.php?event={{event.objectId}}">{{event.name}}</a>

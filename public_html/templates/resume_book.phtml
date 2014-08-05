@@ -4,10 +4,13 @@
 Resume Book
 {% endblock %}
 
-{% block content %}
-        <h3>CSE Scholars Fall 2011</h3>
+{% block page_title %}
+Resume Book
+{% endblock %}
 
-        <table cellspacing="4">
+{% block content %}
+<div class="container-fluid" id="index_container">
+        <table class="table">
                 <th>Name</th>
                 <th>Email</th>
                 <th>Major</th>
@@ -27,4 +30,6 @@ Resume Book
             <td style=\"text-align:center;\">{{userData.serviceHours}}</td>
         </tr>
         {% endfor %}
+        </table>
+</div>
 {% endblock %}

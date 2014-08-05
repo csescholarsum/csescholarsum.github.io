@@ -27,7 +27,7 @@ else if ($_SESSION['type'] == "Admin")
     $event = $parse->find();
 
 
-    echo $twig->render('event_logger.phtml', array('event' => $event->results[0]));
+    echo $twig->render('event_logger.phtml', array('event' => $event->results[0], , 'login' => "NotLoggedIn"));
 }
 
 else{

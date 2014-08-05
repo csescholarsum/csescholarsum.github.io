@@ -7,7 +7,7 @@ include('../parse/parse.php');
 include('../twig.php');
 
 # Uncomment these for testing purposes
-$_SESSION['type'] = 'Member';
+$_SESSION['type'] = 'Admin';
 $_SESSION['USER_UNIQ'] = 'stepa';
 
 # Check if logged in
@@ -30,6 +30,26 @@ else{
     $parse->whereEqualTo('uniqname', $_SESSION['USER_UNIQ']);
     $member = $parse->find();
 
-    echo $twig->render('member_info.phtml', array('member' => $member->results[0]));
+
+    // Parse returns this weird array. I just want the person.
+    $member = $member->results[0];
+
+    // Make person member if they should be
+    if($member->corporate >= 5 and $member->social >= 5 and $member->service >= 5 and $member->type == 'Prospective'){
+        $object = new ParseObject('People');
+        $object->type = 'Member';
+        $object->update($member->objectId);
+
+        // Regrab member object so its updated.
+        $parse = new ParseQuery('People');
+        $parse->whereEqualTo('uniqname', $_SESSION['USER_UNIQ']);
+        $member = $parse->find();
+
+        $member = $member->results[0];
+
+    }
+
+
+    echo $twig->render('member_info.phtml', array('member' => $member, 'login' => $_SESSION['type']));
 }
 ?>

@@ -4,13 +4,19 @@
 {{event.name}} - Event Logger
 {% endblock %}
 
+{% block page_title %}
+{{event.name}}
+{% endblock %}
+
 {% block content %}
-        <h1> {{event.name}} </h1>
         <!-- Form for  registering for event-->
-       <form name="input" id="event_form" action="{{ROOTPATH}}/views/event_logger_post.php" method="post">
+       <form role="form" name="input" id="event_form" action="{{ROOTPATH}}/views/event_logger_post.php" method="post">
         <input type="hidden" name="event" value="{{event.objectId}}">
-        Uniqname: <input type="text" autofocus id="clear" name="uniqname">
-        <input type="submit" value="Submit">
+        <div class="form-group">
+          <label for="uniqname">Uniqname:</label>
+        <input id="uniqname" type="text" autofocus id="clear" name="uniqname">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
        </form>
 
        <script type="text/javascript">
