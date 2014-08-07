@@ -63,6 +63,22 @@ body{
     padding-left: 50px;
 }
 
-#button{
+i {
     margin-right: 5px;
+    font-size: 45px;
+    color: #ffffff;
+}
+
+i:hover{
+    color: #13aeff;
+}
+
+#corporate_box{
+    height: 200px;
+}
+
+#corporate_textbox{
+    margin: 0 auto;
+    margin-top: 75px;
+    text-align: center;
 }
