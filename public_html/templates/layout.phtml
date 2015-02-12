@@ -11,16 +11,15 @@
         <!-- Font Awesome -->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-<<<<<<< HEAD
-
         
         <!-- Carousel - main -->
         <link rel="stylesheet" type="text/css" href="engine1/style.css" />
         <script type="text/javascript" src="engine1/jquery.js"></script>
-
-=======
->>>>>>> parent of 6f157bf... Added the main slider and now am going to add mini ones
         
+        <!-- Carousel - left -->
+        <link rel="stylesheet" type="text/css" href="engine2/style.css" />
+        <script type="text/javascript" src="engine2/jquery.js"></script>
+
         <link href="/static/css/style.css" rel="stylesheet">
         <link href="/static/css/reset.css" rel="stylesheet">
         {% block js %}
@@ -40,6 +39,9 @@
                 <li><a href="/officers.php">Officers</a></li>
                 <li><a href="/corporate.php">Sponsorship</a></li>
                 <li><a href="/views/resume_book.php">Resume Book</a></li>
+
+
+                <!--
                 {% if login == "Prospective" or login == "Member" or login == "Admin" %}
                     <li><a href="/views/member_info.php">My Profile</a></li>
                     <li><a href="/login/logout.php">Logout</a></li>
@@ -49,6 +51,8 @@
                 {% if login == "Admin" %}
                     <li><a href="/views/admin_page.php">Admin Page</a></li>
                 {% endif %}
+
+            -->
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
