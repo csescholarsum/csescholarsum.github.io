@@ -28,7 +28,6 @@ body{
 .asset_box{
     width: 100%;
     height: 300px;
-    background-color: #129d43;
 }
 
 .footer{
@@ -55,7 +54,6 @@ body{
 }
 
 .officer_row{
-    height: 150px;
     margin-bottom: 80px;
 }
 
