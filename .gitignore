@@ -202,3 +202,5 @@ pip-log.txt
 *.sublime-project
 
 _site
+
+node_modules/
