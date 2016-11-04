@@ -20,7 +20,7 @@ p {
 }
 
 .parallax-container {
-  min-height: 380px;
+  min-height: 420px;
   line-height: 0;
   height: auto;
   color: rgba(255,255,255,.9);
@@ -39,7 +39,7 @@ p {
     top: 40%;
   }
   #index-banner .section {
-    top: 10%;
+    top: 5%;
   }
 }
 
@@ -56,10 +56,14 @@ p {
   font-size: inherit;
 }
 
-p.desc{
-  font-size: 13px;
-  font-size: 2.5vw;
+h1.header.center
+{
+    font-size:3em;
+}
 
+p.desc{
+  font-size: 1.3em;
+  line-height: 1.3em;
 }
 
 footer.page-footer {
@@ -98,11 +102,20 @@ a:hover i.fa-facebook-square{
      .big-container {
          display: none;
      }
+ 
  }
  @media (min-width: 550px) {
      .small-container {
          display: none;
      }
+     p.desc{
+      font-size: 1.6em;
+      line-height: 1.5em;
+    }
+    h1.header.center
+    {
+        font-size:4em;
+    }
  }
  /* Responsive iFrame */
  .responsive-iframe-container {
