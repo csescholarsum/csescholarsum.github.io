@@ -1,7 +1,7 @@
 /*!
- * FullCalendar v3.0.1 Google Calendar Plugin
- * Docs & License: http://fullcalendar.io/
- * (c) 2016 Adam Shaw
+ * <%= title %> v<%= version %> Google Calendar Plugin
+ * Docs & License: <%= homepage %>
+ * (c) <%= copyright %>
  */
  
 (function(factory) {

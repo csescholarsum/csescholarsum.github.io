@@ -2,6 +2,7 @@
 ##Backups/Resources
 ###################
 
+.htpasswd
 *.tgz
 DBBackup
 old_resumes/

@@ -4,6 +4,8 @@ define("ROOM_RES_EMAIL_COE", "temp@email.flaccid");
 define("ROOM_RES_PERSON_LSA", "AlicccccceDXW");
 define("ROOM_RES_EMAIL_LSA", "temp2@email.flaccid");
 define("CODE_M_EMAIL", "code-m-board@umich.edu");
+define("CODE_M_PRES_EMAIL", "sarthakb@umich.edu");
+define("CODE_M_PRES_NAME", "Sarthak");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,27 +24,7 @@ define("CODE_M_EMAIL", "code-m-board@umich.edu");
 
 <body>
 
-
-	<nav class="white" role="navigation">
-		<div class="nav-wrapper container">
-			<a id="logo-container" href="index.html" class="brand-logo"><img src="static/img/logo_small.png" height="29" width="150"></a>
-			<ul class="right hide-on-med-and-down">
-				<li class="active"><a href="index.html">Home</a></li>
-				<li><a href="calendar.html">Calendar</a></li>
-				<li><a href="companies.html">Companies</a></li>
-				<li><a href="contact.html">Contact</a></li>
-
-			</ul>
-
-			<ul id="nav-mobile" class="side-nav">
-				<li class="active"><a href="index.html">Home</a></li>
-				<li><a href="calendar.html">Calendar</a></li>
-				<li><a href="companies.html">Companies</a></li>
-				<li><a href="contact.html">Contact</a></li>
-			</ul>
-			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-		</div>
-	</nav>
+  <?php include 'header.php' ?>
 
 	<?php
 		if (isset($_POST['hostEmail']))
@@ -53,6 +35,8 @@ define("CODE_M_EMAIL", "code-m-board@umich.edu");
 		$dateStr = strtotime('+2 weeks', $today);
 		$date = date('Y-m-d', $dateStr);
 	?>
+	
+	<div class="container col-md-6" style="padding-top: 3em; padding-bottom: 3em " >
 	<form method="post">
 		<span class="sH1">Name of Event: </span><input type="text" name="eventName" placeholder="Intro to HTML Workshop" required/>
 		<h1>Date and Time</h1>
@@ -120,6 +104,8 @@ define("CODE_M_EMAIL", "code-m-board@umich.edu");
 		<input type="submit">
 		* This data will be sent to room reservations and social media. Make sure your data is correct and typo free.
 	</form>
+	</div>
+  <?php include 'footer.php' ?>
 
 
 
@@ -226,30 +212,15 @@ define("CODE_M_EMAIL", "code-m-board@umich.edu");
 			"eventDuration" => $_POST['eventDuration'],
 			"shortDesc" => trim($_POST['desc']),
 			"fullDesc" => trim($_POST['fullDesc']),
-			"eventType" => $_POST['eventType']
+			"eventType" => $_POST['eventType'],
+      "password" => substr(md5(microtime()),rand(0,26),5) //Event access password for attendees
 		);
-		/*
-		$eventName = trim($_POST['eventName']);
-		$dateOfEvent = trim($_POST['eventDate']);
-		$possibleStartTime = $_POST['startTime'];
-		$possibleEndTime = $_POST['endTime'];
-		$prefStartTime = $_POST['eventStartTime'];
-		$eventDuration = $_POST['eventDuration'];
-		$campus = $_POST['campus'];
-		$roomPreference = trim($_POST['roomPref']);
-		$shortDesc = trim($_POST['desc']);
-		$fullDesc = trim($_POST['fullDesc']);
-		$eventType = $_POST['eventType'];
-		$hostEmail = trim($_POST['hostEmail']);
-		$cohostEmail = trim($_POST['cohostEmail']);
-		*/
 
-		// Sanitize input
-		//foreach ($data as $key => $value)
-			//$data[$key] = filter_var($value, FILTER_SANITIZE_???);
-		
 
 		echo "<h1>Success!</h1><br><h5>Thanks for your existence</h5>";
+    
+    // Insert event into database
+    
 
 		$isRoomReserved = $_POST['isReserved'];
 		if ($isRoomReserved == "no")
@@ -268,18 +239,11 @@ define("CODE_M_EMAIL", "code-m-board@umich.edu");
 			$startTime = date("g:ia", $startTime);
 			$endTime = date("g:ia", $endTime);
 
-			// Default send to COE
-			$person = ROOM_RES_PERSON_COE;
-			$recipientEmail = ROOM_RES_EMAIL_COE;
 
-			/*dont email lsa since idk if thats how it works for central
-			if ($data['campus'] == "central")
-			{
-				$person = ROOM_RES_PERSON_LSA;
-				$recipientEmail = ROOM_RES_EMAIL_COE;
-			} 
-			*/
+			$person = CODE_M_PRES_NAME;
+			$recipientEmail = CODE_M_PRES_EMAIL;
 
+      
 			emailReserveRoom($recipientEmail, $person, 
 				$data['dateOfEvent'], $startTime, $endTime, 
 				$data['possibleStartTime'], $data['possibleEndTime'], 
@@ -335,6 +299,8 @@ define("CODE_M_EMAIL", "code-m-board@umich.edu");
 		$message .= "Available ending: " . $arr['possibleEndTime'] . "\r\n";
 		$message .= "Preffered Start Time: " . $arr['prefStartTime'] . "\r\n";
 		$message .= "Event Duration: " . $arr['eventDuration'] . "\r\n";
+		$message .= "Attendee Access Password: " . $arr['password'] . "\r\n";
+    
 		if ($arr['campus'])
 		{
 			$message .= "Campus: " . $arr['campus'] . "\r\n";
