@@ -1,4 +1,7 @@
 <?php
+
+	require_once('sql.php');
+
 	//class to read username / password from a .htpasswd file
 	// Source: https://snipt.net/raw/6e83fcf7ddfe852dd79ba6a34224347f/?nice
 	class Password
@@ -76,6 +79,7 @@
 		echo "<h1>Success!</h1><br><h5>Thanks for your existence</h5>";
     
     // Insert event into database
+		insertEvent($data);
     
 
 		$isRoomReserved = $_POST['isReserved'];

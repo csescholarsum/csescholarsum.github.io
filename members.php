@@ -17,12 +17,16 @@
 </head>
 <body>
 
-  <?php include 'header.php' ?>
+  <?php 
+		include 'header.php';
+		include 'sql.php';
+		$user = $_SERVER['REMOTE_USER'];
+		$points = getMemberPoints($user);
+	?>
 
-  	<form method="post">
-	  	<span class="sH1">Uniqname: </span><input type="text" name="uniqname" required/>
-      <input type="submit">
-    </form>
+  	Hello <?php echo $_SERVER['REMOTE_USER']; ?><br>
+		You have earned <?php echo $points; ?> points.
+		
   
   <?php include 'footer.php' ?>
 
