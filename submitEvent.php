@@ -21,7 +21,7 @@ define("CURRENT_PAGE", "Event Submission");
 
 <body>
 
-  <?php include 'header.php' ?>
+  <?php include 'includes/header.php' ?>
 	
 	
 	<?php include 'submitEventServerCode.php' ?>
@@ -106,7 +106,7 @@ define("CURRENT_PAGE", "Event Submission");
 		* This data will be sent to room reservations and social media. Make sure your data is correct and typo free.
 	</form>
 	</div>
-  <?php include 'footer.php' ?>
+  <?php include 'includes/footer.php' ?>
 
 
 

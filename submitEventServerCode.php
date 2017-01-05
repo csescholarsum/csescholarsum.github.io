@@ -1,6 +1,6 @@
 <?php
 
-	require_once('sql.php');
+	require_once('includes/sql.php');
 
 	//class to read username / password from a .htpasswd file
 	// Source: https://snipt.net/raw/6e83fcf7ddfe852dd79ba6a34224347f/?nice

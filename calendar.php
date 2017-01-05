@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <title>Code-M - Calendar</title>
-
+  
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0"/>
 
@@ -16,7 +16,7 @@
 </head>
 <body>
   
-  <?php include 'header.php' ?>
+  <?php include 'includes/header.php' ?>
 
   <div class="container">
     <div class="section center">
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <?php include 'footer.php' ?>
+  <?php include 'includes/footer.php' ?>
 
   <!--  Scripts-->
   <!--Import jQuery before materialize.js-->

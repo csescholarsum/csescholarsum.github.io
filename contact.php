@@ -17,7 +17,7 @@
 </head>
 <body>
 
-	<?php include 'header.php' ?>
+	<?php include 'includes/header.php' ?>
 
 	<div class="container">
 		<div class="section">
@@ -147,7 +147,7 @@
 		</div> <!-- END .SECTION -->
 	</div> <!-- END .container -->
 
-  <?php include 'footer.php' ?>
+  <?php include 'includes/footer.php' ?>
 
 	<!--  Scripts-->
 	<!--Import jQuery before materialize.js-->

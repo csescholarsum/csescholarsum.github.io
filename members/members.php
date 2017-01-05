@@ -10,7 +10,7 @@
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" media="screen,projection">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-  <link href="static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="../static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link rel="shortcut icon" href="static/img/logo_m.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0"/>
 
@@ -18,17 +18,44 @@
 <body>
 
   <?php 
-		include 'header.php';
-		include 'sql.php';
+		include '../includes/header.php';
+		include '../includes/sql.php';
 		$user = $_SERVER['REMOTE_USER'];
 		$points = getMemberPoints($user);
 	?>
 
   	Hello <?php echo $_SERVER['REMOTE_USER']; ?><br>
 		You have earned <?php echo $points; ?> points.
-		
+	
+	<?php 
+		$events = getCurrentEvents();
+		foreach ($events as $ev) { 
+	?> <!-- display all open events -->
+		<div class="wrap-event">
+			<h1><?php echo $ev['name']; ?></h1>
+			<form name="" method="post">
+				<input type="hidden" name="eventid" value="<?php echo $ev['eventid']?>">
+				Event Code: <input type="text" name="eventCode">
+				<input type="submit">
+			</form>
+		</div>
+	<?php } ?> <!-- end loop displaying events -->
+	
+	<?php
+	
+		if (isset($_POST['eventCode']))
+		{
+			$password = $_POST['eventCode'];
+			$eventid = $_POST['eventid'];
+			$success = validateAttendance($user, $password, $eventid);
+			if ($success == True)
+				echo "<h1>Your attendance has been recorded</h1>";
+			else echo "<h1>Incorrect event code</h1>";
+		}
+	
+	?>
   
-  <?php include 'footer.php' ?>
+  <?php include '../includes/footer.php' ?>
 
 <!--  Scripts-->
 <!--Import jQuery before materialize.js-->
