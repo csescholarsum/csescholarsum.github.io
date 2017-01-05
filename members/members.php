@@ -1,7 +1,7 @@
 
 
   <?php 
-		define("CURRENT_PAGE", "Event Submission");
+		define("CURRENT_PAGE", "Members");
 		include '../includes/header.php';
 		include '../includes/sql.php';
 		$user = $_SERVER['REMOTE_USER'];

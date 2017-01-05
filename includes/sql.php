@@ -9,6 +9,7 @@ $TABLE_NAME_USER = 'WINTER2017_users';
 
 
 function getConnection() {
+		global $servername, $username, $password, $dbname;
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -24,6 +25,7 @@ function killConnection($stmt, $conn) {
 // Inserts intial event data (no location or definite date/time)
 function insertEvent($data)
 {
+	global $TABLE_NAME_EVENTS;
   $conn = getConnection();
  
   $stmt = $conn->prepare("INSERT INTO $TABLE_NAME_EVENTS (name, host, datetime, description, access, points) VALUES (?,?,?,?,?,?)");
@@ -32,7 +34,7 @@ function insertEvent($data)
   // set parameters and execute
   $name = $data['eventName'];
   $host = $data['hostEmail'];
-  $datetime = $data['dateOfEvent'] + ' - ' + $data['prefStartTime'];
+  $datetime = $data['dateOfEvent'] . ' - ' . $data['prefStartTime'];
   $description = $data['fullDesc'];
   $access = $data['password'];
   $points = $data['eventDuration'];
@@ -44,6 +46,7 @@ function insertEvent($data)
 // Returns the number of points a member has earned by attending events
 function getMemberPoints($uniqname)
 {
+	global $TABLE_NAME_EVENTS, $TABLE_NAME_ATTENDANCE;
   $conn = getConnection();
 
   $stmt = $conn->prepare("SELECT event FROM $TABLE_NAME_ATTENDANCE WHERE uniqname=?");
@@ -69,6 +72,8 @@ function getMemberPoints($uniqname)
 // Returns the number of points a member has earned by attending events
 function validateAttendance($uniqname, $password, $eventID)
 {
+	global $TABLE_NAME_EVENTS, $TABLE_NAME_ATTENDANCE;
+	
   $conn = getConnection();
   
   $stmt = $conn->prepare("SELECT access FROM $TABLE_NAME_EVENTS WHERE eventID=? AND closed=?");
@@ -94,6 +99,8 @@ function validateAttendance($uniqname, $password, $eventID)
 
 function checkUser($uniqname)
 {
+	global $TABLE_NAME_USER;
+	
   $conn = getConnection();
   $stmt = $conn->prepare("SELECT access FROM $TABLE_NAME_USER WHERE uniqname=? LIMIT 1");
   $stmt->bind_param("s", $uniqname);
@@ -117,6 +124,8 @@ function checkUser($uniqname)
 
 function getCurrentEvents()
 {
+	global $TABLE_NAME_EVENTS;
+	
   $conn = getConnection();
   $stmt = $conn->prepare("SELECT eventID, name, access FROM $TABLE_NAME_EVENTS WHERE closed=?");
   $stmt->bind_param("b", False);
@@ -129,6 +138,8 @@ function getCurrentEvents()
 
 function allCurrentEvents()
 {
+	global $TABLE_NAME_EVENTS;
+	
   $conn = getConnection();
   $stmt = $conn->prepare("SELECT eventID, name, access FROM $TABLE_NAME_EVENTS");
   $stmt->bind_param("b", False);
@@ -141,6 +152,8 @@ function allCurrentEvents()
 
 function toggleEvent($eventID)
 {
+	global $TABLE_NAME_EVENTS;
+	
   $conn = getConnection();
   $stmt = $conn->prepare("SELECT eventID,closed FROM $TABLE_NAME_EVENTS LIMIT 1");
   $stmt->bind_param("b", False);
