@@ -4,22 +4,6 @@ define("CODE_M_PRES_EMAIL", "sarthakb@umich.edu");
 define("CODE_M_PRES_NAME", "Sarthak");
 define("CURRENT_PAGE", "Event Submission");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-	<title>Code-M</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" media="screen,projection">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-	<link href="static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link rel="shortcut icon" href="static/img/logo_m.ico" type="image/x-icon">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0"/>
-
-</head>
-
-<body>
 
   <?php include 'includes/header.php' ?>
 	
@@ -106,38 +90,8 @@ define("CURRENT_PAGE", "Event Submission");
 		* This data will be sent to room reservations and social media. Make sure your data is correct and typo free.
 	</form>
 	</div>
+	<style>
+		span{ font-size: 1.3em; }
+	</style>
   <?php include 'includes/footer.php' ?>
 
-
-
-<style>
-	span{ font-size: 1.3em; }
-</style>
-
-<!--  Scripts-->
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="static/js/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-<script src="main.js"></script>
-<script>
-	// Toggles between if room reservation details input can be selected
-	function allowInput(id)
-	{
-		var isRoomReserved = $('#roomIsReserved').prop('checked');
-		var setBool = true;
-		if (isRoomReserved == false)
-			setBool = false;
-		$('#' + id + ' input').each(function(){
-			$(this).prop('disabled', setBool);
-		});
-		$('#' + id + ' select').each(function(){
-			$(this).prop('disabled', setBool);
-		});
-		$('select').material_select(); // needed to update materialize selects ugh
-	}
-	$(document).ready(function() {
-		$('select').material_select(); //needed for materialize to show selects
-	});
-</script>
-</body>
-</html>
