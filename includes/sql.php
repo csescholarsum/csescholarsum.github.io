@@ -76,8 +76,8 @@ function validateAttendance($uniqname, $password, $eventID)
 	
   $conn = getConnection();
   
-  $stmt = $conn->prepare("SELECT access FROM $TABLE_NAME_EVENTS WHERE eventID=? AND closed=?");
-  $stmt->bind_param("s", $eventID, False);
+  $stmt = $conn->prepare("SELECT access FROM $TABLE_NAME_EVENTS WHERE eventid=? AND open=1");
+  $stmt->bind_param("i", $eventID);
   
   $stmt->execute();
   $stmt->bind_result($event);
@@ -88,7 +88,7 @@ function validateAttendance($uniqname, $password, $eventID)
   if($access === $password){
     $conn = getConnection();
     $stmt = $conn->prepare("INSERT INTO $TABLE_NAME_ATTENDANCE (uniqname,event) VALUES (?,?)");
-    $stmt->bind_param("s", $uniqname, $eventID);
+    $stmt->bind_param("si", $uniqname, $eventID);
     $stmt->execute();
     killConnection($stmt, $conn);
     return True;
@@ -127,11 +127,15 @@ function getCurrentEvents()
 	global $TABLE_NAME_EVENTS;
 	
   $conn = getConnection();
-  $stmt = $conn->prepare("SELECT eventID, name, access FROM $TABLE_NAME_EVENTS WHERE open=?");
-  $stmt->bind_param("b", True);
+  $stmt = $conn->prepare("SELECT eventID, name, access FROM $TABLE_NAME_EVENTS WHERE open=1");
   $stmt->execute();
-  $stmt->bind_result($uniqname);
-  $events = $stmt->fetch_all();
+	// create an associate array of the resuts
+  $row = bind_result_array($stmt);
+	if(!$stmt->error)
+	{
+			while($stmt->fetch())
+					$events[$row[0]] = getCopy($row);
+	}
   killConnection($stmt, $conn);
   return $events;
 }
@@ -168,5 +172,31 @@ function toggleEvent($eventID)
   $stmt->execute();  
   killConnection($stmt, $conn); 
 }
+
+// ####################
+// Creating an assoicate array from prepared statements
+// src = https://gunjanpatidar.wordpress.com/2010/10/03/bind_result-to-array-with-mysqli-prepared-statements/
+function bind_result_array($stmt)
+{
+    $meta = $stmt->result_metadata();
+    $result = array();
+    while ($field = $meta->fetch_field())
+    {
+        $result[$field->name] = NULL;
+        $params[] = &$result[$field->name];
+    }
+
+    call_user_func_array(array($stmt, 'bind_result'), $params);
+    return $result;
+}
+
+/**
+ * Returns a copy of an array of references
+ */
+function getCopy($row)
+{
+    return array_map(create_function('$a', 'return $a;'), $row);
+}
+
 
 ?>
