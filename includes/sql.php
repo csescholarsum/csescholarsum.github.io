@@ -70,22 +70,23 @@ function getMemberPoints($uniqname)
 }
 
 // Returns the number of points a member has earned by attending events
-function validateAttendance($uniqname, $password, $eventID)
+function validateAttendance($uniqname, $pass, $eventID)
 {
 	global $TABLE_NAME_EVENTS, $TABLE_NAME_ATTENDANCE;
 	
   $conn = getConnection();
   
-  $stmt = $conn->prepare("SELECT access FROM $TABLE_NAME_EVENTS WHERE eventid=? AND open=1");
+  $stmt = $conn->prepare("SELECT access FROM $TABLE_NAME_EVENTS WHERE eventid=? AND open=1 LIMIT 1");
   $stmt->bind_param("i", $eventID);
   
   $stmt->execute();
-  $stmt->bind_result($event);
+  $stmt->bind_result($access);
   
   $access = $stmt->fetch();
+	
   killConnection($stmt, $conn);
   
-  if($access === $password){
+  if($access === $pass){
     $conn = getConnection();
     $stmt = $conn->prepare("INSERT INTO $TABLE_NAME_ATTENDANCE (uniqname,event) VALUES (?,?)");
     $stmt->bind_param("si", $uniqname, $eventID);

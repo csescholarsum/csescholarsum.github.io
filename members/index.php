@@ -30,9 +30,9 @@
 	
 		if (isset($_POST['eventCode']))
 		{
-			$password = $_POST['eventCode'];
+			$pass = $_POST['eventCode'];
 			$eventid = $_POST['eventid'];
-			$success = validateAttendance($user, $password, $eventid);
+			$success = validateAttendance($user, $pass, $eventid);
 			if ($success == True)
 				echo "<h1>Your attendance has been recorded</h1>";
 			else echo "<h1>Incorrect event code</h1>";
