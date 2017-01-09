@@ -2,6 +2,7 @@
 
   <?php 
 		define("CURRENT_PAGE", "Members");
+		define("JUMP", "../"); #hacky
 		include '../includes/header.php';
 		include '../includes/sql.php';
 		$user = $_SERVER['REMOTE_USER'];

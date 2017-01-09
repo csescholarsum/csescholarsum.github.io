@@ -1,3 +1,7 @@
+<?php
+if (!defined('JUMP'))
+  define("JUMP", '');
+?>
 <footer class="page-footer blue lighten-2">
   <div class="container">
     <div class="row">
@@ -25,10 +29,10 @@
 
 <!--  Scripts-->
 <!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="static/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo JUMP; ?>static/js/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 <script src="static/js/main.js"></script>
-<?php if (CURRENT_PAGE == 'Event Submission') echo "<script src='static/js/submitEvent.js'></script>"; ?>
+<?php if (CURRENT_PAGE == 'Event Submission') echo "<script src='" . JUMP . "static/js/submitEvent.js'></script>"; ?>
 
 </body>
 </html>

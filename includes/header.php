@@ -6,6 +6,10 @@ $nav = array(
   "companies.php" => "Companies",
   "contact.php" => "Contact"
 );
+
+if (!defined('JUMP'))
+  define("JUMP", '');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +23,7 @@ $nav = array(
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" media="screen,projection">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-  <link href="static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?php echo JUMP; ?>static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link rel="shortcut icon" href="static/img/logo_m.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0"/>
 
@@ -28,7 +32,7 @@ $nav = array(
 
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="index.html" class="brand-logo"><img src="static/img/logo_small.png" height="29" width="150"></a>
+      <a id="logo-container" href="index.php" class="brand-logo"><img src="<?php echo JUMP; ?>static/img/logo_small.png" height="29" width="150"></a>
       <ul class="right hide-on-med-and-down">
         <?php foreach($nav as $link => $title) { ?>
         <li class='<?php if ($title == CURRENT_PAGE) echo "active"; ?>'><a href='<?php echo $link;?>'><?php echo $title ?></a></li>

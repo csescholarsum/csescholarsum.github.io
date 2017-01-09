@@ -127,8 +127,8 @@ function getCurrentEvents()
 	global $TABLE_NAME_EVENTS;
 	
   $conn = getConnection();
-  $stmt = $conn->prepare("SELECT eventID, name, access FROM $TABLE_NAME_EVENTS WHERE closed=?");
-  $stmt->bind_param("b", False);
+  $stmt = $conn->prepare("SELECT eventID, name, access FROM $TABLE_NAME_EVENTS WHERE open=?");
+  $stmt->bind_param("b", True);
   $stmt->execute();
   $stmt->bind_result($uniqname);
   $events = $stmt->fetch_all();
