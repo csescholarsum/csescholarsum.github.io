@@ -16,12 +16,12 @@
 			$pass = $_POST['eventCode'];
 			$eventid = $_POST['eventid'];
 			$success = validateAttendance($user, $pass, $eventid);
-			$message = 'Incorrect event code'
+			$message = 'Incorrect event code';
 			if ($success == True)
 				$message = 'Your attendance has been recorded';
-			echo "<h3 class='submission-notif'>$message</h3>";
+			echo "<div class='valign-wrapper fill'><h3 class='center-block valign'>$message</h3></div>";
 			include '../includes/footer.php'
-			die();
+			exit();
 		}
 	
 	?>

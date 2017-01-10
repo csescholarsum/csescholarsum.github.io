@@ -2,6 +2,7 @@
   padding: 2em 2em 0 0;
 }
 
-#submission-notif{
-  text-align: center;
+.fill{
+  height: calc(100vh - 175px); /* window height minus navbar and footer */
+  width: 100%;
 }
