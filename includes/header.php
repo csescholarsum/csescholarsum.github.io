@@ -24,6 +24,9 @@ if (!defined('JUMP'))
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" media="screen,projection">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
   <link href="<?php echo JUMP; ?>static/css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <?php if(CURRENT_PAGE == "Members") { ?>
+  <link href="<?php echo JUMP; ?>static/css/membersPage.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <?php } ?>
   <link rel="shortcut icon" href="static/img/logo_m.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0"/>
 

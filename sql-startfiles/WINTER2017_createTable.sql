@@ -18,7 +18,7 @@ CREATE TABLE WINTER2017_events
 	description varchar(2000),
 	access varchar(10) NOT NULL,
   open bool NOT NULL DEFAULT 0,
-	points INT NOT NULL
+	points DEC(3,2) NOT NULL
 );
 
 CREATE TABLE WINTER2017_attendance
