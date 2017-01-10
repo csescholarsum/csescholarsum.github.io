@@ -8,21 +8,32 @@
 		$user = $_SERVER['REMOTE_USER'];
 		$points = getMemberPoints($user);
 	?>
-
+<div class="right-align">
   	Hello <?php echo $_SERVER['REMOTE_USER']; ?><br>
-		You have earned <?php echo $points; ?> points.
+		You have earned <b><?php echo $points; ?></b> points.
+</div>
 	
 	<?php 
 		$events = getCurrentEvents();
 		foreach ($events as $ev) { 
 	?> <!-- display all open events -->
 		<div class="wrap-event">
-			<h1><?php echo $ev['name']; ?></h1>
+			<h1 class="header center blue-text"><?php echo $ev['name']; ?></h1>
+			<div class="row">
+			<div class="col s12">
+			<div class="input-field col s12">
 			<form name="" method="post">
 				<input type="hidden" name="eventid" value="<?php echo $ev['eventid']?>">
-				Event Code: <input type="text" name="eventCode">
-				<input type="submit">
+				<label for="eventCode">Event Code</label>
+				<input type="text" name="eventCode" id="eventCode">
+				<!-- <input type="submit"> -->
+				<button class="btn waves-effect waves-light blue" type="submit">Submit
+    <i class="material-icons right">send</i>
+  </button>
 			</form>
+			</div>
+			</div>
+			</div>
 		</div>
 	<?php } ?> <!-- end loop displaying events -->
 	
