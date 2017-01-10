@@ -48,8 +48,8 @@
 		function randomCompliment()
 		{
 			global $compliments;
-			$output = array_rand($compliments, 1);
-			echo $compliments;
+			$rKey = array_rand($compliments, 1);
+			echo $compliments[$rKey];
 		}
 		
 		define("CURRENT_PAGE", "Members");
