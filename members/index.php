@@ -20,7 +20,7 @@
 			if ($success == True)
 				$message = 'Your attendance has been recorded';
 			echo "<div class='valign-wrapper fill'><h3 class='center-block valign'>$message</h3></div>";
-			include '../includes/footer.php'
+			include '../includes/footer.php';
 			exit();
 		}
 	
