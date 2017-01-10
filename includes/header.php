@@ -35,13 +35,13 @@ if (!defined('JUMP'))
       <a id="logo-container" href="index.php" class="brand-logo"><img src="<?php echo JUMP; ?>static/img/logo_small.png" height="29" width="150"></a>
       <ul class="right hide-on-med-and-down">
         <?php foreach($nav as $link => $title) { ?>
-        <li class='<?php if ($title == CURRENT_PAGE) echo "active"; ?>'><a href='<?php echo $link;?>'><?php echo $title ?></a></li>
+        <li class='<?php if ($title == CURRENT_PAGE) echo "active"; ?>'><a href='<?php echo JUMP .$link;?>'><?php echo $title ?></a></li>
         <?php } ?>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
         <?php foreach($nav as $link => $title) { ?>
-        <li class='<?php if ($title == CURRENT_PAGE) echo "active"; ?>'><a href='<?php echo $link;?>'><?php echo $title ?></a></li>
+        <li class='<?php if ($title == CURRENT_PAGE) echo "active"; ?>'><a href='<?php echo JUMP . $link;?>'><?php echo $title ?></a></li>
         <?php } ?>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
