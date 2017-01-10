@@ -55,17 +55,28 @@ function getMemberPoints($uniqname)
   $stmt->execute();
   $stmt->bind_result($event);
   
-  // Sum up the points
-  $sum = 0;
+
   
   // loop through returned events$uniqname has attended
-  while ($stmt->fetch()) { 
-      // dont need to use prepared statement since getting result from table
-      $result = $conn->query('SELECT points FROM $TABLE_NAME_EVENTS WHERE eventid=$event LIMIT 1');
-      $row = $result->fetch_row();
-      $sum += $row['points'];
-  }
+  while ($stmt->fetch())
+      $eventId_arr[] = $event;
   killConnection($stmt, $conn);
+	
+	
+	  // Sum up the points
+  $sum = 0;
+	foreach ($eventId_arr as $eId)
+	{
+		$conn = getConnection();
+		$points_stmt = $conn->prepare("SELECT points FROM $TABLE_NAME_EVENTS WHERE eventid=? LIMIT 1");
+		$points_stmt->bind_param('i', $eId);
+		$points_stmt->execute();
+		$points_stmt->bind_result($points);
+		while ($points_stmt->fetch())
+			$sum += $points;
+		killConnection($stmt, $conn);
+	}
+
   return $sum;
 }
 
@@ -82,14 +93,13 @@ function validateAttendance($uniqname, $pass, $eventID)
   $stmt->execute();
   $stmt->bind_result($access);
   
-  $access = $stmt->fetch();
-	
-  killConnection($stmt, $conn);
+  while( $stmt->fetch() )
+        $ac = $access;
   
-  if($access === $pass){
+  if($ac === $pass){
     $conn = getConnection();
-    $stmt = $conn->prepare("INSERT INTO $TABLE_NAME_ATTENDANCE (uniqname,event) VALUES (?,?)");
-    $stmt->bind_param("si", $uniqname, $eventID);
+    $stmt = $conn->prepare("INSERT INTO $TABLE_NAME_ATTENDANCE (uniqname, event) SELECT ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM $TABLE_NAME_ATTENDANCE WHERE uniqname=? AND event=?) LIMIT 1");
+    $stmt->bind_param("sisi", $uniqname, $eventID, $uniqname, $eventID);
     $stmt->execute();
     killConnection($stmt, $conn);
     return True;
@@ -128,7 +138,7 @@ function getCurrentEvents()
 	global $TABLE_NAME_EVENTS;
 	
   $conn = getConnection();
-  $stmt = $conn->prepare("SELECT eventID, name, access FROM $TABLE_NAME_EVENTS WHERE open=1");
+  $stmt = $conn->prepare("SELECT eventid, name, access FROM $TABLE_NAME_EVENTS WHERE open=1");
   $stmt->execute();
 	// create an associate array of the resuts
   $row = bind_result_array($stmt);
