@@ -78,7 +78,7 @@
 	?>
 	<div class="fill">
 		
-		<div id="status" class="right-align">
+		<div id="status" class="left-align">
 			<h5>Hello <?php echo $_SERVER['REMOTE_USER']; ?></h5>
 			<?php randomCompliment(); ?> and<br>
 			You have earned <b><?php echo $points; ?></b> points.
